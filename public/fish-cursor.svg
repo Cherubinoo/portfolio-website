@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 64 64">
+  <!-- Minimal, crisp fish icon for cursor; transparent background -->
+  <path d="M8 32c7-6 18-10 28-10 2 0 6 0 10 1 2-2 5-4 8-5-1 4-1 8 0 12-3-1-6-3-8-5-4 1-8 1-10 1-10 0-21-4-28-10 0 5 0 11 0 16Z" fill="#22D3EE"/>
+  <circle cx="45" cy="25" r="2" fill="#0C4A6E"/>
+  <path d="M12 26c2 2 2 10 0 12-2-1-6-3-8-6 2-3 6-5 8-6Z" fill="#0EA5A5"/>
+  <path d="M30 38c5 3 11 4 16 3-4 3-10 5-16 5-7 0-14-2-20-6 6-2 13-2 20-2Z" fill="#14B8A6" opacity=".7"/>
+</svg>
+
