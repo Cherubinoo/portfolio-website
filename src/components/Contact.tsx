@@ -40,17 +40,17 @@ const Contact = () => {
   const socialLinks = [
     {
       name: "LinkedIn",
-      href: "https://linkedin.com/in/delight-cherubino",
+      href: "https://www.linkedin.com/in/delight-cherubino-bb8456291",
       icon: Linkedin
     },
     {
       name: "GitHub",
-      href: "https://github.com/delight-cherubino",
+      href: "https://github.com/Cherubinoo",
       icon: Github
     },
     {
       name: "Instagram",
-      href: "https://instagram.com/delight_cherubino",
+      href: "https://www.instagram.com/cherubino.97x/",
       icon: Instagram
     }
   ];
