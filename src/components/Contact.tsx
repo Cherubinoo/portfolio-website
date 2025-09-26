@@ -20,20 +20,20 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "delight.cherubino@gmail.com",
-      href: "mailto:delight.cherubino@gmail.com"
+      value: "delightcherubino@gmail.com",
+      href: "mailto:delightcherubino@gmail.com"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+91 9876543210",
-      href: "tel:+919876543210"
+      value: "+91 8220789878",
+      href: "tel:+918220789878"
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "Chennai, India",
-      href: null
+      value: "Munnar, India",
+      href: "https://www.google.com/maps/search/?api=1&query=Munnar%2C%20India"
     }
   ];
 
