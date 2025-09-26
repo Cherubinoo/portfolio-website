@@ -2,6 +2,173 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Sea-themed page transitions */
+.page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0ea5e9, #06b6d4, #0891b2);
+  z-index: 9999;
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-transition.active {
+  transform: translateY(0);
+}
+
+.enter-transition {
+  transform: translateY(100%);
+  transition: transform 1.5s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother easing */
+  opacity: 0;
+}
+
+.enter-transition.active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 1.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.exit-transition {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 1.0s cubic-bezier(0.55, 0.06, 0.68, 0.19), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.exit-transition.active {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Enhanced scroll effects */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sea wave animations */
+@keyframes wave-motion {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(5px) rotate(1deg); }
+  50% { transform: translateX(-3px) rotate(-1deg); }
+  75% { transform: translateX(2px) rotate(0.5deg); }
+}
+
+.wave-animation {
+  animation: wave-motion 6s ease-in-out infinite;
+}
+
+/* Floating elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Bubble effects */
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(135, 206, 235, 0.3);
+  animation: bubble-rise 8s linear infinite;
+}
+
+.bubble-enhanced {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(135, 206, 235, 0.3));
+  box-shadow: 0 0 20px rgba(135, 206, 235, 0.2);
+  animation: bubble-rise 8s linear infinite;
+}
+
+/* Enhanced sea creature animations */
+@keyframes swimTransition {
+  0% { transform: translateX(-120px) translateY(0px) rotate(0deg); }
+  25% { transform: translateX(25vw) translateY(-25px) rotate(5deg); }
+  50% { transform: translateX(50vw) translateY(15px) rotate(-3deg); }
+  75% { transform: translateX(75vw) translateY(-20px) rotate(2deg); }
+  100% { transform: translateX(120vw) translateY(0px) rotate(0deg); }
+}
+
+@keyframes floatTransition {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  25% { transform: translateY(-20px) rotate(3deg) scale(1.05); }
+  50% { transform: translateY(-10px) rotate(-2deg) scale(0.95); }
+  75% { transform: translateY(-15px) rotate(1deg) scale(1.02); }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) translateZ(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0px);
+  }
+}
+
+/* Smooth page entrance animation */
+@keyframes pageEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.page-entrance {
+  animation: pageEntrance 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Enhanced parallax */
+.parallax-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.parallax-layer {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
 /* Smooth scrolling and sea cursor */
 html {
   scroll-behavior: smooth;

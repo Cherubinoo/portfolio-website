@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { useState } from "react";
 import heroImg from "@/assets/hero-mountain-landscape.jpg";
+import ScrollEffects from "./ScrollEffects";
+import TypewriterText from "./TypewriterText";
+import ParallaxElement from "./ParallaxElement";
 
 const Portfolio = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -34,7 +37,7 @@ const Portfolio = () => {
       id: 4,
       role: "ML Project Intern",
       company: "Ramco Schools",
-      period: "Aug 2025 – Present",
+      period: "July 2025 – Present",
       highlights: ["Education ML", "Model experimentation", "Insights dashboards"],
     },
   ];
@@ -102,21 +105,31 @@ const Portfolio = () => {
     <section id="portfolio" className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-6">
         {/* Work Experience */}
-        <div className="mb-16 animate-fade-in-up">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6 text-center">
-            Work Experience
-          </h2>
+        <ScrollEffects effect="fadeIn" delay={200} duration={800}>
+          <div className="mb-16">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6 text-center">
+              <TypewriterText 
+                text="Work Experience"
+                speed={100}
+                delay={300}
+                className="text-foreground"
+              />
+            </h2>
+          </div>
+        </ScrollEffects>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-center mb-10">
             A snapshot of roles where I built elegant visuals and performant interfaces.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {experiences.map((exp, index) => (
-              <Card
-                key={exp.id}
-                className="border-0 shadow-elegant bg-card/80 backdrop-blur-sm animate-scale-in"
-                style={{ animationDelay: `${index * 0.08}s` }}
-              >
+          <ScrollEffects effect="slideUp" delay={400} duration={1000}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {experiences.map((exp, index) => (
+                <ScrollEffects key={exp.id} effect="scale" delay={500 + index * 100} duration={600}>
+                  <Card
+                    className="border-0 shadow-elegant bg-card/80 backdrop-blur-sm hover:shadow-warm transition-all duration-300 cursor-pointer group"
+                    onMouseEnter={() => setHoveredCard(exp.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
                 <CardHeader className="pb-2">
                   <div className="flex items-start justify-between">
                     <CardTitle className="font-serif text-xl">
@@ -143,32 +156,41 @@ const Portfolio = () => {
                     ))}
                   </div>
                 </CardContent>
-              </Card>
-            ))}
-          </div>
+                  </Card>
+                </ScrollEffects>
+              ))}
+            </div>
+          </ScrollEffects>
         </div>
 
         {/* Featured Projects */}
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Featured Projects
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my creative journey through AI & ML Integrated IOT and Microcontrollers , 3D visualization, and web development
-          </p>
-        </div>
+        <ScrollEffects effect="fadeIn" delay={200} duration={800}>
+          <div className="text-center mb-16">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
+              <TypewriterText 
+                text="Featured Projects"
+                speed={100}
+                delay={300}
+                className="text-foreground"
+              />
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              A showcase of my creative journey through AI & ML Integrated IOT and Microcontrollers , 3D visualization, and web development
+            </p>
+          </div>
+        </ScrollEffects>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <Card 
-              key={project.id}
-              className={`group cursor-pointer overflow-hidden border-0 shadow-elegant hover:shadow-warm transition-all duration-500 transform hover:-translate-y-2 animate-scale-in bg-card/80 backdrop-blur-sm ${
-                hoveredCard === index ? 'scale-105' : ''
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
+        <ScrollEffects effect="slideUp" delay={400} duration={1000}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <ScrollEffects key={project.id} effect="scale" delay={500 + index * 150} duration={600}>
+                <Card 
+                  className={`group cursor-pointer overflow-hidden border-0 shadow-elegant hover:shadow-warm transition-all duration-500 transform hover:-translate-y-2 bg-card/80 backdrop-blur-sm ${
+                    hoveredCard === index ? 'scale-105' : ''
+                  }`}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
               <div className="relative overflow-hidden">
                 <img
                   src={project.image}
@@ -221,10 +243,11 @@ const Portfolio = () => {
                   ))}
                 </div>
               </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
+                </Card>
+              </ScrollEffects>
+            ))}
+          </div>
+        </ScrollEffects>
     </section>
   );
 };

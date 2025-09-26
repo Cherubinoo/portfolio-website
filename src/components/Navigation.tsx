@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import signatureImg from "@/assets/1000004081-removebg-preview.png";
+import SeaTransition from "./SeaTransition";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,9 +19,21 @@ const Navigation = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
-    setIsMobileMenuOpen(false);
+    setIsTransitioning(true);
+    
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+      setIsMobileMenuOpen(false);
+    }, 100);
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 900);
   };
 
   const navItems = [
@@ -112,6 +126,9 @@ const Navigation = () => {
           </div>
         )}
       </div>
+      
+      {/* Sea transition overlay */}
+      <SeaTransition isActive={isTransitioning} />
     </nav>
   );
 };

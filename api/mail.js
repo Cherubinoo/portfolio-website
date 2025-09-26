@@ -1,13 +1,4 @@
-import express from 'express';
-import cors from 'cors';
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env' });
-
-const app = express();
-app.use(cors());
-app.use(express.json());
+const nodemailer = require('nodemailer');
 
 const {
   SMTP_USER,
@@ -18,11 +9,10 @@ const {
 } = process.env;
 
 if (!SMTP_USER || !SMTP_PASS) {
-  // eslint-disable-next-line no-console
-  console.warn('[mail] Missing SMTP_USER/SMTP_PASS in .env');
+  console.warn('[mail] Missing SMTP_USER/SMTP_PASS in environment variables');
 }
 
-const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransporter({
   host: SMTP_HOST,
   port: Number(SMTP_PORT),
   secure: Number(SMTP_PORT) === 465, // true for 465
@@ -32,7 +22,25 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-app.post('/api/mail', async (req, res) => {
+export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ ok: false, error: 'Method not allowed' });
+  }
+
   try {
     const { firstName, lastName, email, subject, message } = req.body || {};
     if (!email || !subject || !message) {
@@ -54,16 +62,7 @@ ${message}`.trim();
 
     res.json({ ok: true });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('[mail] send error', err);
     res.status(500).json({ ok: false, error: 'Failed to send' });
   }
-});
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`[mail] server listening on http://localhost:${PORT}`);
-});
-
-
+}
