@@ -72,10 +72,14 @@ exports.handler = async (event) => {
       body: JSON.stringify({ ok: true }),
     };
   } catch (err) {
+    // Log full error server-side for troubleshooting
+    console.error('[netlify-mail] send error', err);
+    const isProd = process.env.NODE_ENV === 'production';
+    const safeMessage = isProd ? 'Failed to send' : (err && err.message ? String(err.message) : 'Failed to send');
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ ok: false, error: 'Failed to send' }),
+      body: JSON.stringify({ ok: false, error: safeMessage }),
     };
   }
 };
